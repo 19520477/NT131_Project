@@ -16,8 +16,8 @@ import Navigation from '../../Navigation';
 import Inputs from '../components/Inputs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Icon} from 'react-native-elements';
-import {Feather} from "react-native-vector-icons";
+//import {Icon} from 'react-native-elements';
+//import {Feather} from "react-native-vector-icons";
 
 function Login ({navigation}) {
     //const [visible, setVisible] = useState(true);

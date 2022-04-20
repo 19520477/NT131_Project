@@ -7,21 +7,22 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  Image,
   FlatList
 } from 'react-native';
 import { Component } from 'react/cjs/react.production.min';
 import login_bg_img from '../images/background_img/login_background.png';
-import ToolBar from '../components/ToolBar';
+//import ToolBar from '../components/ToolBar';
 import DeviceItem from '../components/DeviceItem';
 
-const UnconnectedDevice = props => {
+function UnconnectedDevice({navigation}) {
     const [device, setDevice] = useState([
-        {name: 'Thiet bi Arduino 1', key: '1'},
-        {name: 'Thiet bi Arduino 2', key: '2'},
-        {name: 'Thiet bi Arduino 3', key: '3'},
-        {name: 'Thiet bi Arduino 4', key: '4'},
-        {name: 'Thiet bi Arduino 5', key: '5'},
-        {name: 'Thiet bi Arduino 6', key: '6'},
+        {name: 'Thiet bi Arduino 1'},
+        {name: 'Thiet bi Arduino 2'},
+        {name: 'Thiet bi Arduino 3'},
+        {name: 'Thiet bi Arduino 4'},
+        {name: 'Thiet bi Arduino 5'},
+        {name: 'Thiet bi Arduino 6'},
     ]);
     return (
         <ImageBackground style = {styles.background} source = {login_bg_img} resizeMode='stretch'>
@@ -34,7 +35,29 @@ const UnconnectedDevice = props => {
                 </ScrollView>
                 
             </View>
-            <ToolBar/>
+            <View style = {styles.navigationBar}>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('UnconnectedDevice')}>
+        <Image source={require('../images/navigation_icons/search_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('Login')}>
+        <Image source={require('../images/navigation_icons/forward_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('ConnectedDevice')}>
+        <Image style = {styles.iconImg} source={require('../images/navigation_icons/home_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('ViewDetail')}>
+        <Image source={require('../images/navigation_icons/image_12_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('Credits')}>
+        <Image source={require('../images/navigation_icons/profile_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+    </View>
             </ScrollView>
         </ImageBackground>
     );
@@ -98,7 +121,37 @@ const styles = StyleSheet.create ({
         //alignItems: 'center',
         //justifyContent: 'center',
         backgroundColor: '#DCE8F5',
-    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    },   
+    navigationBar: {
+        position: 'absolute',
+        width: '95%',
+        height: 62,
+        left: 9,
+        //top: 550,
+        bottom: 10,
+        //top: 625,
+        flexDirection: 'row',
+        backgroundColor: '#F4F2F2',
+        borderRadius: 15,
+        padding: 10,
+      },
+      navigationIcon: {
+        flex: 1,
+        left: 3,
+        //paddingTop: 10,
+        //paddingLeft: 10,
+        //width: 90,
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignContent: 'center',
+        //backgroundColor: 'pink',
+        borderRadius: 10,
+      },
+      iconImg: {
+        width: '80%',
+        height: '100%',
+      }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 });
 
 export default UnconnectedDevice;

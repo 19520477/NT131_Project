@@ -34,8 +34,8 @@ function ConnectedDevice ({navigation}) {
     }, []);
 
     const [accessory, setAccessory] = useState ([
-        {name: "Vay chong nang", key: '1'},
-        {name: "Kinh ram", key: '2'},
+        {name: "Vay chong nang"},
+        {name: "Kinh ram"},
     ]);
     return (
         <ImageBackground style = {styles.background} source = {bg_img} resizeMode='stretch'>
@@ -52,7 +52,6 @@ function ConnectedDevice ({navigation}) {
                 containerStyle={styles.containerCircle}
                 outerCircleStyle={styles.outerCircleView}
                 //style = {styles.circle}
-                //width = {200}
                 //shadowColor="#999"
                 //bgColor="#fff"
                 >
@@ -79,7 +78,30 @@ function ConnectedDevice ({navigation}) {
                 }
                 
                 </SafeAreaView>
-                </SafeAreaView>
+                <View style = {styles.navigationBar}>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('UnconnectedDevice')}>
+        <Image source={require('../images/navigation_icons/search_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('Login')}>
+        <Image source={require('../images/navigation_icons/forward_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('ConnectedDevice')}>
+        <Image style = {styles.iconImg} source={require('../images/navigation_icons/home_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('ViewDetail')}>
+        <Image source={require('../images/navigation_icons/image_12_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+      <TouchableOpacity style = {styles.navigationIcon}
+        onPress={() => navigation.navigate('Credits')}>
+        <Image source={require('../images/navigation_icons/profile_icon.png')} resizeMode={'stretch'}/>
+      </TouchableOpacity>
+    </View>
+            </SafeAreaView>
             </ScrollView>
         </ImageBackground>
     );
@@ -235,7 +257,37 @@ const styles = StyleSheet.create ({
         display: 'flex',
         textAlign: 'left',
         backgroundColor: 'pink',
-    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    },  
+    navigationBar: {
+        position: 'absolute',
+        width: '95%',
+        height: 62,
+        left: 9,
+        //top: 550,
+        bottom: 10,
+        //top: 625,
+        flexDirection: 'row',
+        backgroundColor: '#F4F2F2',
+        borderRadius: 15,
+        padding: 10,
+      },
+      navigationIcon: {
+        flex: 1,
+        left: 3,
+        //paddingTop: 10,
+        //paddingLeft: 10,
+        //width: 90,
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignContent: 'center',
+        //backgroundColor: 'pink',
+        borderRadius: 10,
+      },
+      iconImg: {
+        width: '80%',
+        height: '100%',
+      }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 });
 
 export default ConnectedDevice;

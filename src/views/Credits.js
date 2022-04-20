@@ -8,16 +8,18 @@ import {
   useColorScheme,
   View,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Image,
 } from 'react-native';
-import { normalize } from 'react-native-elements';
-import ToolBar from '../components/ToolBar';
+//import { normalize } from 'react-native-elements';
+//import ToolBar from '../components/ToolBar';
 import bg_img from '../images/background_img/credits_bg_img.png';
 
-const Credits = props => {
+function Credits({navigation}) {
     return (
         <ImageBackground style = {styles.background} source = {bg_img} resizeMode='stretch'>
-            <ScrollView style = {styles.container}>
+            <ScrollView>
+            <View style = {styles.container}>
                 <Text style = {styles.title}>CREDITS</Text>
                 <View style = {{top: 170}}>
                     <Text style = {styles.childTitle}>Contributors</Text>
@@ -56,6 +58,30 @@ const Credits = props => {
                     <Text style = {styles.content}>Mongo Cloud Cluster</Text>
                     <Text style = {styles.content}>Firebase</Text>
                 </View>
+                <View style = {styles.navigationBar}>
+                <TouchableOpacity style = {styles.navigationIcon}
+                    onPress={() => navigation.navigate('UnconnectedDevice')}>
+                    <Image source={require('../images/navigation_icons/search_icon.png')} resizeMode={'stretch'}/>
+                </TouchableOpacity>
+                
+                <TouchableOpacity style = {styles.navigationIcon}
+                    onPress={() => navigation.navigate('Login')}>
+                    <Image source={require('../images/navigation_icons/forward_icon.png')} resizeMode={'stretch'}/>
+                </TouchableOpacity>
+                <TouchableOpacity style = {styles.navigationIcon}
+                    onPress={() => navigation.navigate('ConnectedDevice')}>
+                    <Image style = {styles.iconImg} source={require('../images/navigation_icons/home_icon.png')} resizeMode={'stretch'}/>
+                </TouchableOpacity>
+                <TouchableOpacity style = {styles.navigationIcon}
+                    onPress={() => navigation.navigate('ViewDetail')}>
+                    <Image source={require('../images/navigation_icons/image_12_icon.png')} resizeMode={'stretch'}/>
+                </TouchableOpacity>
+                <TouchableOpacity style = {styles.navigationIcon}
+                    onPress={() => navigation.navigate('Credits')}>
+                    <Image source={require('../images/navigation_icons/profile_icon.png')} resizeMode={'stretch'}/>
+                </TouchableOpacity>
+                </View>
+            </View>
             </ScrollView>
         </ImageBackground>
     );
@@ -71,7 +97,7 @@ const styles = StyleSheet.create ({
     container: {
         flex: 1,
         alignContent: 'center',
-        width: 320,
+        width: '100%',
         height: 1635,
         position: 'relative',
         background: '#fff',
@@ -118,7 +144,7 @@ const styles = StyleSheet.create ({
     },
     content: {
         fontFamily: 'Ubuntu',
-        fontStyle: 'normalize',
+        fontStyle: 'normal',
         fontWeight: '300',
         fontSize: 16,
         lineHeight: 24,
@@ -129,7 +155,37 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
 
         color: '#FFF7F7',
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    },
+    navigationBar: {
+        position: 'absolute',
+        width: '95%',
+        height: 62,
+        left: 9,
+        //top: 550,
+        bottom: 10,
+        //top: 625,
+        flexDirection: 'row',
+        backgroundColor: '#F4F2F2',
+        borderRadius: 15,
+        padding: 10,
+      },
+      navigationIcon: {
+        flex: 1,
+        left: 3,
+        //paddingTop: 10,
+        //paddingLeft: 10,
+        //width: 90,
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignContent: 'center',
+        //backgroundColor: 'pink',
+        borderRadius: 10,
+      },
+      iconImg: {
+        width: '80%',
+        height: '100%',
+      }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 });
 
 export default Credits;
