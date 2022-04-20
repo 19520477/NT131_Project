@@ -17,6 +17,7 @@ import bg_img from '../images/background_img/hot_bg_img.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FactorItem from '../components/FactorItem';
+import ProgressCircle from 'react-native-progress-circle';
 
 function ConnectedDevice ({navigation}) {
     const [greet, setGreet] = useState();
@@ -38,9 +39,26 @@ function ConnectedDevice ({navigation}) {
     ]);
     return (
         <ImageBackground style = {styles.background} source = {bg_img} resizeMode='stretch'>
-            <ScrollView>
-            <View style = {styles.container}>
+            <ScrollView nestedScrollEnabled={true}>            
+            <SafeAreaView style = {styles.container}>
                 <Text style = {styles.greeting}>{`Good ${greet}, Mai Dung`}</Text>
+
+                <View style = {styles.progressCircleView}>
+                <ProgressCircle
+                percent={30}
+                radius={100}
+                borderWidth={10}
+                color="#424B5A"
+                containerStyle={styles.containerCircle}
+                outerCircleStyle={styles.outerCircleView}
+                //style = {styles.circle}
+                //width = {200}
+                //shadowColor="#999"
+                //bgColor="#fff"
+                >
+                <Text style={{ fontSize: 18 }}>{'30%'}</Text>
+            </ProgressCircle>
+            </View>
 
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigation.navigate('ViewDetail')}>
@@ -55,13 +73,13 @@ function ConnectedDevice ({navigation}) {
 
                 <Text style = {styles.accessoryTitle}>Phu kien cho hom nay</Text>
 
-                <View style = {styles.square}>
-                <FlatList
-                    data = {accessory}
-                            renderItem={({item}) => <FactorItem item={item}/>}
-                />
-                </View>
-                </View>
+                <SafeAreaView style = {styles.square}>
+                {
+                    accessory.map((item) => <FactorItem item={item}/>)
+                }
+                
+                </SafeAreaView>
+                </SafeAreaView>
             </ScrollView>
         </ImageBackground>
     );
@@ -89,6 +107,27 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
         color: '#000000',
     },  
+    progressCircleView: {
+        top: 85,
+        width: '100%',
+        height: 212,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    outerCircleView: {
+        
+        width: 200,
+        height: 200,
+        left: 10,
+        right: 10,
+        padding: 10,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
+    containerCircle: {
+        width: 150,
+        height: 150,
+    },
     button: {
         position: 'absolute',
         width: '80%',
@@ -136,6 +175,7 @@ const styles = StyleSheet.create ({
         lineHeight: 24,
     },      
     square: {
+        flex: 1,
         top: 830,
         width: '95%',
         position: 'absolute',
@@ -147,7 +187,7 @@ const styles = StyleSheet.create ({
     infoView: {
         flexDirection: 'column',
         backgroundColor: '#fff',
-        top: 430,
+        top: 220,
         width: '92%',
         height: 300,
         left: 15,
@@ -159,7 +199,7 @@ const styles = StyleSheet.create ({
         height: 45,
         padding: 10,
         //left: 15,
-        //top: 550,
+        //top: 800,
         fontSize: 20,
         //justifyContent: 'center',
         textAlign: 'left',
@@ -180,8 +220,10 @@ const styles = StyleSheet.create ({
         right: 5,
     },
     infoContent: {
-        width: '100%',
-        //height: 30,
+        width: '97%',
+        left: 5,
+        right: 5,
+        height: 80,
         top: 60,
         padding: 5,
         fontSize: 12,

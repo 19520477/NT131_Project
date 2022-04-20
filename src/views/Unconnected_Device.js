@@ -29,14 +29,12 @@ const UnconnectedDevice = props => {
             <View style = {styles.container}>
                 <Text style = {styles.title}>XIN CHAO!</Text>
                 <Text style = {styles.requireConnect}>Truoc het, hay ket noi voi mot thiet bi do Adruino dang hien thi nhe</Text>
-                <View style = {styles.square}>
-                    <FlatList
-                    data = {device}
-                        renderItem={({item}) => <DeviceItem item={item}/>}
-                        />
-                </View>
+                <ScrollView nestedScrollEnabled={true} style = {styles.square}>
+                    {device.map((item) => <DeviceItem item={item}/>)}
+                </ScrollView>
                 
             </View>
+            <ToolBar/>
             </ScrollView>
         </ImageBackground>
     );
@@ -90,7 +88,7 @@ const styles = StyleSheet.create ({
     square: {
         position: 'absolute',
         width: '90%',
-        height: 334,
+        height: 344,
         left: 15,
         top: 157,
         paddingLeft: 10,

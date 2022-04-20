@@ -7,13 +7,14 @@ import UnconnectedDevice from './src/views/Unconnected_Device';
 import ConnectedDevice from './src/views/Connected_Device';
 import Detail from './src/views/View_Detail';
 import Credits from './src/views/Credits';
+import ToolBar from './src/components/ToolBar';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = props => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="ConnectedDevice" screenOptions={{headerShown: false}}>
+            <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="UnconnectedDevice" component={UnconnectedDevice}/>
                 <Stack.Screen name="ConnectedDevice" component={ConnectedDevice}/>

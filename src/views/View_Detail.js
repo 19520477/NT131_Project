@@ -29,12 +29,11 @@ const Detail = props => {
             <View style = {styles.container}>
                 <Image style = {styles.weatherImg} source={require("../images/show_password_icon.png")}/>
                 <Text style = {styles.title}>37, HOT</Text>
-                <View style = {styles.square}>
-                    <FlatList
-                        data = {factor}
-                            renderItem={({item}) => <FactorItem item={item}/>}
-                    />
-                </View>
+                <SafeAreaView style = {styles.square}>
+                    {
+                        factor.map((item) => <FactorItem item={item}/>)
+                    }
+                </SafeAreaView>
                 <Text style = {styles.adviceTitle}>Loi khuyen cua bac si</Text>
                 <View style = {styles.adviceView}>
                     <Text style = {styles.adviceContent}>data</Text>

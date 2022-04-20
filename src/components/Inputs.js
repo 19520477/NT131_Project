@@ -1,6 +1,6 @@
 import React, {Component, useState} from "react";
-import {View, StyleSheet, Text, Image, TouchableOpacity} from "react-native";
-//import { Button, Icon, Input} from "react-native-elements";
+import {View, StyleSheet, Text, Image, TouchableOpacity, TextInput} from "react-native";
+//import {Input} from "react-native-elements";
 //import {Feather} from "react-native-vector-icons";
 
 //const [visiblePass, setVisiblePass] = useState(true);
@@ -13,12 +13,12 @@ class Inputs extends Component {
     render() {
         return(
             <View style = {[styles.container, {borderColor: this.state.isFocused? '#283ACF' : '#c2d1d9'}]}>
-                <Input
+                <TextInput
                     placeholder={this.props.name}
                     onFocus={this.onFocusChange}
                     inputContainerStyle={styles.inputContainer}
                     inputStyle={styles.inputText}
-                    secureTextEntry={this.props.pass=visiblePass? true: false}
+                    secureTextEntry={this.props.pass}
                     />               
             </View>
         );
