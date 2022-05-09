@@ -1,74 +1,108 @@
-import React, {Component} from "react";
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
-const FactorItem = ({item}) => {
-    return (
-        <View style = {styles.listItem}>
-            <View style = {styles.listItemView}>
-                <View style = {styles.ellipse}></View>
-                <View style = {styles.contentView}>
-                    <Text style = {styles.listItemText}>{item.name}</Text>
-                    <Text style = {styles.detail}>detail</Text>
-                </View>
-            </View>
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const FactorItem = ({temp, humid, uv}) => {
+  return (
+    <React.Fragment>
+      <View style={styles.listItemView}>
+        <View style={styles.ellipse}>
+          <Ionicons name="ios-thermometer-outline" size={40} color="red" />
         </View>
-    );
-}
+        <View style={styles.contentView}>
+          <Text style={styles.listItemText}>Temperature</Text>
+          <Text style={styles.detail}>{temp}°C</Text>
+        </View>
+      </View>
+
+      <View style={styles.listItemView}>
+        <View style={styles.ellipse}>
+          <Ionicons name="water-sharp" size={40} color="blue" />
+        </View>
+        <View style={styles.contentView}>
+          <Text style={styles.listItemText}>Humidity</Text>
+          <Text style={styles.detail}>{humid}%</Text>
+        </View>
+      </View>
+
+      <View style={styles.listItemView}>
+        <View style={styles.ellipse}>
+          <Ionicons name="sunny-outline" size={40} color="yellow" />
+        </View>
+        <View style={styles.contentView}>
+          <Text style={styles.listItemText}>UV Ratio</Text>
+          <Text style={styles.detail}>{uv}%</Text>
+        </View>
+      </View>
+
+      <View style={styles.listItemView}>
+        <View style={styles.ellipse}>
+          <Ionicons name="ios-heart-sharp" size={40} color="#FF214C" />
+        </View>
+        <View style={styles.contentView}>
+          <Text style={styles.listItemText}>Real Feel</Text>
+          <Text style={styles.detail}>{parseFloat(temp + 3)}°C</Text>
+        </View>
+      </View>
+    </React.Fragment>
+  );
+};
 
 const styles = StyleSheet.create({
-    listItem: {
-        flex: 1,
-        paddingTop: 25,
-    },
-    listItemView: {
-        width: '95%',
-        height: 74,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        left: 5,
-        right: 5,
-        paddingLeft: 5,
-    },
-    listItemText: {
-        width: 160,
-        height: 30,
-        paddingLeft: 5,
-        fontSize: 14,
-        color: '#000',
-        fontFamily: 'Ubuntu',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        lineHeight: 24,
-        display: 'flex',
-        textAlign: 'left',
-    },
-    ellipse: {
-        width: 55,
-        height: 55,
-        alignItems: 'center',
-        backgroundColor: '#000',
-        borderRadius: 50,
-    },
-    detail: {
-        width: 160,
-        height: 30,
-        paddingLeft: 5,
-        fontSize: 12,
-        color: '#000',
-        fontFamily: 'Ubuntu',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        lineHeight: 24,
-        display: 'flex',
-        textAlign: 'left',
-    },
-    contentView: {
-        flexDirection: 'column',
-        //height: '100%',
-
-    },
+  listItemView: {
+    width: '95%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 7,
+    marginBottom: '8%',
+    borderRadius: 10,
+  },
+  listItemText: {
+    //paddingLeft: 5,
+    fontSize: 16,
+    color: '#000',
+    fontFamily: 'Ubuntu',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    lineHeight: 24,
+    //display: 'flex',
+    textAlign: 'left',
+  },
+  ellipse: {
+    width: '20%',
+    //height: '30%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'pink',
+    borderRadius: 100,
+    padding: 10,
+  },
+  detail: {
+    //paddingLeft: 5,
+    fontSize: 14,
+    color: '#000',
+    fontFamily: 'Ubuntu',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    lineHeight: 24,
+    display: 'flex',
+    textAlign: 'left',
+  },
+  contentView: {
+    marginLeft: 10,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    //height: '100%',
+  },
 });
 
 export default FactorItem;

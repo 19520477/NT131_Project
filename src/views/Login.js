@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,133 +10,194 @@ import {
   ImageBackground,
   TextInput,
   Button,
-  Image
+  Dimensions,
+  Image,
 } from 'react-native';
 import Navigation from '../../Navigation';
 import Inputs from '../components/Inputs';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import {Icon} from 'react-native-elements';
-//import {Feather} from "react-native-vector-icons";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import axios from '../api';
 
-function Login ({navigation}) {
-    //const [visible, setVisible] = useState(true);
-    return (
-        <ImageBackground style = {styles.background} 
-            source = {require('../images/background_img/login_background.png')} resizeMode='stretch'>
-            <View style={styles.container}>
-                <Text style = {styles.title}>LOGIN</Text>
-                <View style = {{marginTop: 10}}/>
-                <Inputs name="Email"/>
-                <Inputs name="Password"/> 
-                
-                <Text style={styles.forgotPassword}>Forgot your password?
-                    <Text style={styles.clickHere}> Click here</Text>
-                </Text>
-                
-                <TouchableOpacity style={styles.button}
-                    onPress={() => navigation.navigate('UnconnectedDevice')}>
-                    <Text style = {styles.buttonName}>LOGIN</Text>
-                </TouchableOpacity>
-            </View>
-            
-        </ImageBackground>
-    );
-};
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
-const styles = StyleSheet.create ({
-    background: {
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        //background: '#FFFFFF',
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title:{
-        position: 'absolute',
-        width: 170,
-        height: 71,
-        left: '25%',
-        right: '50%',
-        top: '18%',
-        fontSize: 30,
-        //justifyContent: 'center',
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        //alignItems: 'center',
-        color: '#FBFBFB',
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-        fontFamily: 'Ubuntu',
-        lineHeight: 34,
-        textTransform: 'uppercase',
-        marginVertical: 10,
-    },  
-    forgotPassword: {
-        position: 'absolute',
-        width: 270,
-        height: 40,
-        left: 20,
-        top: 408,
-        fontFamily: 'Ubuntu',
-        fontStyle: 'normal',
-        fontWeight: "300",
-        fontSize: 12,
-        lineHeight: 14,
-        textTransform: 'capitalize',
-        color: '#000000',
-    },
-    clickHere: {
-        position: 'absolute',
-        width: 270,
-        height: 40,
-        left: 20,
-        top: 408,
-        fontFamily: 'Ubuntu',
-        fontStyle: 'normal',
-        fontWeight: "300",
-        fontSize: 12,
-        lineHeight: 14,
-        textTransform: 'capitalize',
-        color: '#283ACF',
-    },
-    button: {
-        position: 'absolute',
-        left: 110,
-        right: 95,
-        top: '70%',
-        bottom: '25%',
-        backgroundColor: '#424B5A',
-        marginTop: 30,
-        width: 130,
-        height: 43,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 70,
-    }, 
-    buttonName: {
-        position: 'absolute',
-        height: 30,
-        width: 60,
-        //left: '30.99%',
-        //right: '32.28%',
-        top: 13.5,
+function Login({navigation}) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-        fontFamily: 'Ubuntu',
-        fontStyle: 'normal',
-        fontWeight: "400",
-        fontSize: 16,
-        lineHeight: 16,
-        textAlign: 'center',
-        textTransform: 'uppercase',
+  const login = async () => {
+    try {
+      const {data} = await axios.post('/auth/login', {
+        username,
+        password,
+      });
+      if (data.success) {
+        navigation.navigate('UnconnectedDevice');
+      }
+    } catch (e) {
+      alert('Login Failed');
+    }
+  };
+  return (
+    <ImageBackground
+      style={styles.background}
+      source={require('../images/background_img/login_background.png')}
+      resizeMode="stretch">
+      <View style={styles.container}>
+        <Text style={styles.title}>LOGIN</Text>
+        <View style={styles.square}>
+          <Inputs
+            name="Username"
+            icon="user"
+            value={username}
+            text={text => setUsername(text)}
+          />
+          <Inputs
+            name="Password"
+            icon="key"
+            value={password}
+            pass={true}
+            text={text => setPassword(text)}
+          />
+        </View>
+        <View style={styles.questionView}>
+          <Text style={styles.questionText}>Forgot Password?</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={styles.onClickText}> Click Here</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={login}>
+          <Text style={styles.buttonName}>LOGIN</Text>
+        </TouchableOpacity>
 
-        color: '#FFFFFF',
-    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+        <View style={styles.questionView}>
+          <Text style={styles.questionText}>Don’t have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.onClickText}> Sign up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ImageBackground>
+  );
+}
+
+const styles = StyleSheet.create({
+  background: {
+    position: 'relative',
+    width: windowWidth,
+    height: windowHeight,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    position: 'relative',
+    padding: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    //height: '80%',
+  },
+  title: {
+    //position: 'absolute',
+    width: 0.5 * windowWidth,
+    height: 0.07 * windowHeight,
+    //left: '25%',
+    //right: '50%',
+    marginTop: '30%',
+    fontSize: 30,
+    //justifyContent: 'center',
+    textAlign: 'center',
+    //textAlignVertical: 'center',
+    //alignItems: 'center',
+    color: '#FBFBFB',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontFamily: 'Ubuntu',
+    lineHeight: 34,
+    textTransform: 'uppercase',
+    //marginVertical: 10,
+  },
+
+  square: {
+    //position: 'absolute',
+    width: '100%',
+    //height: '50%',
+    marginTop: '15%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    //backgroundColor: '#DCE8F5',
+    borderRadius: 5,
+  },
+
+  questionView: {
+    //position: 'absolute',
+    width: '100%',
+    height: 25,
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  questionText: {
+    //position: 'absolute',
+
+    fontFamily: 'Ubuntu',
+    fontStyle: 'normal',
+    fontWeight: '300',
+    fontSize: 12,
+    lineHeight: 14,
+    textTransform: 'capitalize',
+    color: '#000000',
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  onClickText: {
+    fontFamily: 'Ubuntu',
+    fontStyle: 'normal',
+    fontWeight: '300',
+    fontSize: 12,
+    lineHeight: 14,
+    textTransform: 'capitalize',
+    color: '#283ACF',
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+
+  button: {
+    //position: 'absolute',
+    //top: '70%',
+    //bottom: '25%',
+    backgroundColor: '#424B5A',
+    marginTop: '10%',
+    marginBottom: '7%',
+    width: 0.35 * windowWidth,
+    height: '8%',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonName: {
+    //position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    //left: '30.99%',
+    //right: '32.28%',
+    //top: 13.5,
+
+    fontFamily: 'Ubuntu',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 18,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#FFFFFF',
+    //backgroundColor: 'white',
+  },
 });
 
 export default Login;
