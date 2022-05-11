@@ -9,7 +9,7 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const FactorItem = ({temp, humid, uv}) => {
+const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
   return (
     <React.Fragment>
       <View style={styles.listItemView}>
@@ -18,7 +18,9 @@ const FactorItem = ({temp, humid, uv}) => {
         </View>
         <View style={styles.contentView}>
           <Text style={styles.listItemText}>Temperature</Text>
-          <Text style={styles.detail}>{temp}°C</Text>
+          <Text style={styles.detail}>
+            {temp}°C {'\t'} | {'\t'} {fah} °F
+          </Text>
         </View>
       </View>
 
@@ -28,7 +30,9 @@ const FactorItem = ({temp, humid, uv}) => {
         </View>
         <View style={styles.contentView}>
           <Text style={styles.listItemText}>Humidity</Text>
-          <Text style={styles.detail}>{humid}%</Text>
+          <Text style={styles.detail}>
+            {humid}% {'\t'} | {'\t'} Wind intensity: {wind}
+          </Text>
         </View>
       </View>
 
@@ -38,7 +42,9 @@ const FactorItem = ({temp, humid, uv}) => {
         </View>
         <View style={styles.contentView}>
           <Text style={styles.listItemText}>UV Ratio</Text>
-          <Text style={styles.detail}>{uv}%</Text>
+          <Text style={styles.detail}>
+            {uv}% {'\t'} | {'\t'} Light intensity: {light}
+          </Text>
         </View>
       </View>
 

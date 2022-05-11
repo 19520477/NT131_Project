@@ -38,8 +38,11 @@ const windowHeight = Dimensions.get('window').height;
 function Detail({navigation}) {
   const [sensorData, setSensorData] = useState({
     temp: 0,
+    fah: 0,
     humid: 0,
     uv: 0,
+    light: 0,
+    wind: 0,
   });
 
   // call api
@@ -49,8 +52,11 @@ function Detail({navigation}) {
       if (data.success) {
         setSensorData({
           temp: data.info.temp[0].celcius,
+          fah: data.info.temp[0].fahrenheit,
           humid: data.info.humid[0].humidity,
           uv: data.info.light[0].uv,
+          light: data.info.light[0].light,
+          wind: data.info.light[0].windDensity,
         });
       }
     } catch (e) {
@@ -131,8 +137,11 @@ function Detail({navigation}) {
             <View style={styles.square}>
               <FactorItem
                 temp={sensorData?.temp}
+                fah={sensorData?.fah}
                 humid={sensorData?.humid}
+                wind={sensorData?.wind}
                 uv={sensorData?.uv}
+                light={sensorData?.light}
               />
             </View>
             <Text style={styles.adviceTitle}>Lời khuyên của bác sĩ</Text>

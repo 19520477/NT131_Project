@@ -14,7 +14,8 @@ import {
   Image,
 } from 'react-native';
 import {Component} from 'react/cjs/react.production.min';
-import bg_img from '../images/background_img/hot_bg_img.png';
+import hot_bg_img from '../images/background_img/hot_bg_img.png';
+import cold_bg_img from '../images/background_img/login_background.png';
 
 import AccessoryItem from '../components/AccessoryItem';
 import ProgressCircle from 'react-native-progress-circle';
@@ -59,6 +60,11 @@ function ConnectedDevice({navigation}) {
     humid: 0,
     uv: 0,
   });
+  const [user, setUser] = useState({
+    username: null,
+    fullname: null,
+    password: null,
+  });
 
   // call api
   const getSensorInformtion = async () => {
@@ -73,7 +79,24 @@ function ConnectedDevice({navigation}) {
       }
     } catch (e) {
       console.error(e);
-      alert('Get Info Failed!');
+      //alert('Get Info Failed!');
+    }
+  };
+
+  // get user's fullname, but server doesn't response
+  const getUserInformtion = async () => {
+    try {
+      const {userInfo} = await axios.get('/auth/info/fullname', {});
+      if (userInfo.success) {
+        setUser({
+          username: userInfo.userInfo.user.username,
+          fullname: userInfo.userInfo.user.fullname,
+          password: userInfo.userInfo.user.password,
+        });
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Get your name Failed!');
     }
   };
 
@@ -123,6 +146,8 @@ function ConnectedDevice({navigation}) {
   };
 
   useEffect(() => {
+    findGreet();
+    getUserInformtion();
     getSensorInformtion();
     const timeOutId = setTimeout(() => getSensorInformtion(), 60000 * 5);
 
@@ -136,13 +161,6 @@ function ConnectedDevice({navigation}) {
     if (hours === 12 || hours < 18) return setGreet('Afternoon');
     else return setGreet('Evening');
   };
-
-  // useEffect(() => {
-  //   findGreet();
-  //   getInfo();
-  //   getFeeling();
-  //   //getAccessory();
-  // }, []);
 
   const [hot_accessory, setHotAccessory] = useState([
     {
@@ -296,16 +314,25 @@ function ConnectedDevice({navigation}) {
       ));
   };
 
+  const getBackground = temp => {
+    if (temp <= 26) return cold_bg_img;
+    else if (temp > 26) return hot_bg_img;
+    else return cold_bg_img;
+  };
+
   return (
     <ImageBackground
       style={styles.background}
-      source={bg_img}
+      source={getBackground(sensorData?.temp)}
       resizeMode="stretch">
       <SafeAreaView style={styles.container}>
         <ScrollView nestedScrollEnabled={true}>
           <View style={styles.childContainer}>
             {/* greeting to user */}
-            <Text style={styles.greeting}>{`Good ${greet}, `}</Text>
+            <Text
+              style={
+                styles.greeting
+              }>{`Good ${greet}, ${user?.fullname}`}</Text>
 
             {/* temperature */}
             <View style={styles.progressCircleView}>
