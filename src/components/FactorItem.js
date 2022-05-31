@@ -17,7 +17,7 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
           <Ionicons name="ios-thermometer-outline" size={40} color="red" />
         </View>
         <View style={styles.contentView}>
-          <Text style={styles.listItemText}>Temperature</Text>
+          <Text style={styles.listItemText}>Nhiệt độ</Text>
           <Text style={styles.detail}>
             {temp}°C {'\t'} | {'\t'} {fah} °F
           </Text>
@@ -29,9 +29,9 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
           <Ionicons name="water-sharp" size={40} color="blue" />
         </View>
         <View style={styles.contentView}>
-          <Text style={styles.listItemText}>Humidity</Text>
+          <Text style={styles.listItemText}>Độ ẩm</Text>
           <Text style={styles.detail}>
-            {humid}% {'\t'} | {'\t'} Wind intensity: {wind}
+            {humid}% {'\t'} | {'\t'} Cường độ gió: {wind}
           </Text>
         </View>
       </View>
@@ -41,9 +41,9 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
           <Ionicons name="sunny-outline" size={40} color="yellow" />
         </View>
         <View style={styles.contentView}>
-          <Text style={styles.listItemText}>UV Ratio</Text>
+          <Text style={styles.listItemText}>Chỉ số tia UV</Text>
           <Text style={styles.detail}>
-            {uv}% {'\t'} | {'\t'} Light intensity: {light}
+            {uv}% {'\t'} | {'\t'} Cường độ ánh sáng: {light}
           </Text>
         </View>
       </View>
@@ -53,7 +53,7 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
           <Ionicons name="ios-heart-sharp" size={40} color="#FF214C" />
         </View>
         <View style={styles.contentView}>
-          <Text style={styles.listItemText}>Real Feel</Text>
+          <Text style={styles.listItemText}>Cảm giác như</Text>
           <Text style={styles.detail}>{parseFloat(temp + 3)}°C</Text>
         </View>
       </View>
@@ -63,14 +63,16 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
 
 const styles = StyleSheet.create({
   listItemView: {
-    width: '95%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 7,
-    marginBottom: '8%',
+    //backgroundColor: '#fff',
+    padding: 5,
+    marginBottom: '5%',
     borderRadius: 10,
+    borderColor: '#9bedff',
+    borderWidth: 1,
   },
   listItemText: {
     //paddingLeft: 5,
@@ -78,19 +80,23 @@ const styles = StyleSheet.create({
     color: '#000',
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontWeight: '700',
     lineHeight: 24,
     //display: 'flex',
     textAlign: 'left',
   },
   ellipse: {
-    width: '20%',
+    width: '16%',
     //height: '30%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'pink',
+    backgroundColor: '#9bedff',
     borderRadius: 100,
     padding: 10,
+    borderColor: '#9bedff',
+
+    borderWidth: 1,
+    //marginLeft: '2%',
   },
   detail: {
     //paddingLeft: 5,

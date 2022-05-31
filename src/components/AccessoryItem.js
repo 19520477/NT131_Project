@@ -27,11 +27,11 @@ const AccessoryItem = ({item}) => {
 const styles = StyleSheet.create({
   listItemView: {
     flex: 1,
-    width: '97%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#rgba(255, 255, 255,0.4)',
     padding: 7,
     marginBottom: '8%',
     borderRadius: 10,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontWeight: '700',
     lineHeight: 24,
     //display: 'flex',
     textAlign: 'left',

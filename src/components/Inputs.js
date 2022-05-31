@@ -48,12 +48,14 @@ const styles = StyleSheet.create({
     //borderBottomWidth: 1.5,
     flexDirection: 'row',
     marginBottom: 30,
-    backgroundColor: '#C2D1D9',
+    //backgroundColor: '#C2D1D9',
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 5,
     paddingRight: 5,
     borderRadius: 10,
+    borderBottomWidth: 1,
+    //borderColor:
   },
   inputContainer: {
     borderBottomWidth: 0,

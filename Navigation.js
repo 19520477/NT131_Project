@@ -8,6 +8,7 @@ import ConnectedDevice from './src/views/Connected_Device';
 import Detail from './src/views/View_Detail';
 import Credits from './src/views/Credits';
 import Register from './src/views/Register';
+import Weather from './src/views/Weather';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const Navigation = props => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="ViewDetail"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
@@ -23,6 +24,7 @@ const Navigation = props => {
         <Stack.Screen name="ConnectedDevice" component={ConnectedDevice} />
         <Stack.Screen name="ViewDetail" component={Detail} />
         <Stack.Screen name="Credits" component={Credits} />
+        <Stack.Screen name="Weather" component={Weather} />
       </Stack.Navigator>
     </NavigationContainer>
   );

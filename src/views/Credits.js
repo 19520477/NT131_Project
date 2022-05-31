@@ -31,7 +31,9 @@ function Credits({navigation}) {
   return (
     <ImageBackground
       style={styles.background}
-      source={bg_img}
+      source={{
+        uri: 'https://i.pinimg.com/236x/e7/5a/f9/e75af99681538cf8d89fd7e5633aafc6.jpg',
+      }}
       resizeMode="stretch">
       <View style={styles.container}>
         <ScrollView>
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: windowWidth,
-    height: 1635,
+    height: windowHeight * 1.2,
     //background: '#fff',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -158,8 +160,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
     fontWeight: '700',
-    fontSize: 24,
-    lineHeight: 24,
+    fontSize: 30,
+    lineHeight: 30,
     marginTop: 70,
     marginBottom: 20,
     /* or 92% */
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
   content: {
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
-    fontWeight: '300',
+    fontWeight: 'normal',
     fontSize: 16,
     lineHeight: 24,
     /* or 150% */
@@ -206,13 +208,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
 
-    color: '#FFF7F7',
+    color: '#555555',
   },
   navigationBar: {
     position: 'absolute',
     //flex: 1,
-    width: '90%',
-    height: 62,
+    width: '95%',
+    height: '10%',
     marginTop: 0.85 * windowHeight,
     marginBottom: 10,
     flexDirection: 'row',
@@ -224,8 +226,8 @@ const styles = StyleSheet.create({
   },
   navigationIcon: {
     flex: 1,
-    width: 50,
-    height: 50,
+    width: '20%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

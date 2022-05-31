@@ -13,6 +13,7 @@ import {
   Dimensions,
   FlatList,
 } from 'react-native';
+
 import {Component} from 'react/cjs/react.production.min';
 import login_bg_img from '../images/background_img/login_background.png';
 import FactorItem from '../components/FactorItem';
@@ -35,7 +36,7 @@ import axios from '../api';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function Detail({navigation}) {
+const Detail = props => {
   const [sensorData, setSensorData] = useState({
     temp: 0,
     fah: 0,
@@ -61,46 +62,131 @@ function Detail({navigation}) {
       }
     } catch (e) {
       console.error(e);
-      alert('Get Info Failed!');
+      //alert('Get Info Failed!');
     }
+  };
+
+  // const video_url = {
+  //   hot: 'https://media.istockphoto.com/videos/thermometer-on-blue-sky-with-sun-shining-video-id1322031944',
+  //   cloudy: 'https://pixabay.com/videos/sky-clouds-wind-heaven-weather-3186/',
+  //   rainy: 'https://pixabay.com/videos/rain-thunderstorm-lightning-clouds-305/',
+  //   snowy: 'https://pixabay.com/videos/snow-snowfall-snowflakes-flakes-7090/',
+  // };
+
+  const getFeelingByTemp = temp => {
+    if (temp < 25)
+      return {
+        title: 'Trời hôm nay khá lạnh đó',
+        ad_title: 'Trời khá lạnh',
+        t_alert:
+          'Nhiệt độ khá thấp, uống nhiều nước ấm và mặc quần áo dày để giữ ấm cơ thể. Nếu nhiệt độ giảm sâu cần sử dụng lò sưởi trong nhà (lưu ý không sử dụng sưởi bằng than trong phòng kín và ban đêm, có thể gây ngạt khí và ngộ độc CO).',
+      };
+    if (temp < 30)
+      return {
+        title: 'Nhiệt độ hoàn hảo để ra ngoài',
+        ad_title: 'Thời tiết đẹp',
+        t_alert:
+          'Nhiệt độ hoàn hảo để ra ngoài, tuy nhiên vẫn nên bổ sung nước khi vận động nhiều. Khi ra ngoài nên chú ý chỉ số UV để lựa chọn các phụ kiện phù hợp.',
+      };
+    if (temp < 35)
+      return {
+        title: 'Trời hôm nay khá nóng đó',
+        ad_title: 'Trời khá nóng',
+        t_alert:
+          'Nhiệt độ khá cao, cần bổ sung nhiều nước và vitaminC tăng sức đề kháng. Khi ra ngoài cần chú ý chỉ số UV và chuẩn bị các phụ kiện chống nắng.',
+      };
+    if (temp < 40)
+      return {
+        title: 'Trời rất nóng, hãy cẩn thận!',
+        ad_title: 'Trời rất nóng',
+        t_alert:
+          'Nhiệt độ rất cao, cần chuẩn bị các phụ kiện bảo hộ chống nắng kỹ càng khi ra ngoài, hạn chế tiếp xúc trực tiếp với ánh nắng mặt trời. Bổ sung nhiều nước, vitaminC, điện giải,… Chú ý không nên mở điều hòa quá thấp, chênh lệnh vừa phải với nhiệt độ ngoài trời, tránh gây sốc nhiệt.',
+      };
+  };
+
+  const getAdviceByUV = uv => {
+    if (uv <= 5)
+      return {
+        uv_alert:
+          'Mức UV an toàn, tuy nhiên vẫn cần sử dụng kem chống nắng. Xem kĩ hơn về tiêu chuẩn kem chống nắng tại phần gợi ý.',
+      };
+    if (uv > 5 && uv < 7)
+      return {
+        uv_alert:
+          'Mức UV khá cao, cần sử dụng kem chống nắng, váy chống nắng để tránh say nắng, lưu ý bổ sung thêm vitamin để giữ sức khoẻ. ',
+      };
+    if (uv > 7)
+      return {
+        uv_alert:
+          'Mức UV rất cao, cần đem các trang thiết bị cần thiết và mặc trang bị bảo hộ chống nắng.',
+      };
+  };
+
+  const getAdviceByHumidity = humid => {
+    if (humid <= 40)
+      return {
+        h_alert:
+          'Độ ẩm quá thấp, cần bổ sung gấp nước và sử dụng kem dưỡng ẩm, son dưỡng ẩm cho môi và da. Da có thể bị khô nứt hoặc tác động xấu nếu không sử dụng các sản phẩm bảo vệ hợp lý. Bảo quản các đồ dùng bằng da và gỗ tránh bị nứt.',
+      };
+    if (humid > 40 && humid <= 65)
+      return {
+        h_alert: 'Độ ẩm hoàn hảo. vẫn cần bổ sung nhiều nước.',
+      };
+    if (humid > 65)
+      return {
+        h_alert:
+          'Độ ẩm cao, trời nồm. Sàn nhà dễ tụ nước gây ẩm mốc và dễ trượt té. Lưu ý giữ ấm cơ thể, vì đây là môi trường hoàn hảo cho nấm mốc sinh sôi và phát triển.',
+      };
   };
 
   const getFeeling = temp => {
     if (temp < 15)
       return {
         title: 'Freezing Cold',
-        image: freezing_img,
+        image: {
+          uri: 'https://i.pinimg.com/564x/8d/2d/a9/8d2da973662e2275c83f0c53e475fa70.jpg',
+        },
         msg: 'Tốt hơn hết là bạn nên ở trong nhà và sử dụng lò sưởi (không nên sử dụng sưởi bằng than), mặc quần áo giữ ấm cơ thể .  Uống nhiều nước ấm. Nếu cần ra ngoài bạn nên mặc áo quần dày và mang theo các dụng cụ chống trơn trượt (có thể có tuyết).',
       };
     if (temp >= 15 && temp <= 20)
       return {
         title: 'Cold',
-        image: cold_img,
+        image: {
+          uri: 'https://i.pinimg.com/564x/8d/2d/a9/8d2da973662e2275c83f0c53e475fa70.jpg',
+        },
         msg: 'Bạn nên sử dụng lò sưởi khi ở nhà (không nên sử dụng sưởi bằng than), mặc quần áo giữ ấm cơ thể. Ra ngoài trời bạn nên mặc thêm áo dày, găng tay và choàng len. Uống nhiều nước ấm.',
       };
-    if (temp > 20 && temp <= 26)
+    if (temp > 20 && temp <= 25)
       return {
         title: 'Cool',
-        image: cool_img,
+        image: {
+          uri: 'https://i.pinimg.com/564x/58/16/76/5816764c8263592980816f911e6540d0.jpg',
+        },
         msg: 'Thời tiết mát mẻ và dễ chịu. Bạn nên ra ngoài trời vận động, làm việc hoặc vui chơi thay vì nằm ngủ cả ngày ở nhà.',
       };
-    if (temp > 26 && temp <= 32)
+    if (temp > 25 && temp <= 35)
       return {
         title: 'Warm',
-        image: warm_img,
-        msg: 'Thời tiết ấm áp, phù hợp với việc hoạt động ngoài trời cũng như trong nhà. Tuy nhiên bạn cũng cần bổ sung nước và thức ăn, thức uống giải nhiệt cho cơ thể (phòng khi hoạt động hoặc ở ngoài trời quá lâu).',
+        image: {
+          uri: 'https://i.pinimg.com/564x/0f/1f/07/0f1f0735d1180ea44839191fbd20e2f2.jpg',
+        },
+        msg: 'Thời tiết khá phù hợp với việc hoạt động ngoài trời cũng như trong nhà. Tuy nhiên bạn cũng cần bổ sung nước và thức ăn, thức uống giải nhiệt cho cơ thể (phòng khi hoạt động hoặc ở ngoài trời quá lâu).',
       };
-    if (temp > 32 && temp < 50)
+    if (temp > 35 && temp < 40)
       return {
         title: 'Kinda Hot',
-        image: hot_img,
+        image: {
+          uri: 'https://i.pinimg.com/564x/c5/24/59/c52459c8bea20f1f31de8a7b59a75915.jpg',
+        },
         msg: 'Nhiệt độ cao khiến cơ thể dễ bị mất nước. Bạn nên ở nhà tránh nóng hoặc ở những nơi điều hòa khí hậu, uống nhiều nước và vitamin C tăng sức đề kháng cho cơ thể. Tránh tiếp xúc trực tiếp với ánh nắng mặt trời.',
       };
-    if (temp >= 50)
+    if (temp >= 40)
       return {
         title: 'Burning Hot',
-        image: burning_img,
-        msg: 'Cố gắng tìm nơi tránh nóng. Chúc bạn may mắn vượt qua.',
+        image: {
+          uri: 'https://i.pinimg.com/564x/cd/95/6e/cd956ebaa10e2d6a6779e2db942d6ec3.jpg',
+        },
+        msg: 'Cố gắng tìm nơi tránh nóng. Thời tiết không thích hợp để đi ra ngoài nhiều, tránh tiếp xúc với ánh nắng mặt trời quá lâu. Bổ sung thêm nhiều nước và vitaminC cho cơ thể. .',
       };
     else
       return {
@@ -112,7 +198,7 @@ function Detail({navigation}) {
 
   useEffect(() => {
     getSensorInformtion();
-    const timeOutId = setTimeout(() => getSensorInformtion(), 60000 * 5);
+    const timeOutId = setTimeout(() => getSensorInformtion(), 60000);
 
     return () => clearTimeout(timeOutId);
   }, []);
@@ -121,18 +207,22 @@ function Detail({navigation}) {
   return (
     <ImageBackground
       style={styles.background}
-      source={login_bg_img}
+      source={{uri: 'https://wallpaperaccess.com/full/1250595.jpg'}}
       resizeMode="stretch">
       <View style={styles.container}>
         <ScrollView>
+          <Image
+            style={styles.weatherImg}
+            source={getFeeling(sensorData?.temp).image}
+          />
           <View style={styles.childContainer}>
-            <Image
-              style={styles.weatherImg}
-              source={getFeeling(sensorData?.temp).image}
-              resizeMode="stretch"
-            />
+            <Text
+              style={styles.forecast}
+              onPress={() => props.navigation.navigate('Weather')}>
+              Xem dự báo thời tiết
+            </Text>
             <Text style={styles.title}>{`${sensorData?.temp}°C, ${
-              getFeeling(sensorData?.temp).title
+              getFeelingByTemp(sensorData?.temp).ad_title
             }`}</Text>
             <View style={styles.square}>
               <FactorItem
@@ -144,10 +234,17 @@ function Detail({navigation}) {
                 light={sensorData?.light}
               />
             </View>
-            <Text style={styles.adviceTitle}>Lời khuyên của bác sĩ</Text>
+            <Text style={styles.adviceTitle}>
+              Lời khuyên của bác sĩ (uy tín)
+            </Text>
             <View style={styles.adviceView}>
               <Text style={styles.adviceContent}>
-                {getFeeling(sensorData?.temp).msg}
+                {' - '}
+                {getFeelingByTemp(sensorData?.temp).t_alert} {'\n'}
+                {' - '}
+                {/* {getAdviceByUV(sensorData?.uv).uv_alert} {'\n'} */}
+                {' - '}
+                {getAdviceByHumidity(sensorData?.humid).h_alert}
               </Text>
             </View>
           </View>
@@ -157,7 +254,7 @@ function Detail({navigation}) {
         <View style={styles.navigationBar}>
           <TouchableOpacity
             style={styles.navigationIcon}
-            onPress={() => navigation.navigate('UnconnectedDevice')}>
+            onPress={() => props.navigation.navigate('UnconnectedDevice')}>
             <MaterialCommunityIcons
               name="text-box-search-outline"
               size={35}
@@ -168,7 +265,7 @@ function Detail({navigation}) {
 
           <TouchableOpacity
             style={styles.navigationIcon}
-            onPress={() => navigation.navigate('Login')}>
+            onPress={() => props.navigation.navigate('Login')}>
             <MaterialIcons
               name="logout"
               size={35}
@@ -178,7 +275,7 @@ function Detail({navigation}) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.navigationIcon}
-            onPress={() => navigation.navigate('ConnectedDevice')}>
+            onPress={() => props.navigation.navigate('ConnectedDevice')}>
             <Feather
               name="home"
               size={33}
@@ -188,7 +285,7 @@ function Detail({navigation}) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.navigationIcon}
-            onPress={() => navigation.navigate('ViewDetail')}>
+            onPress={() => props.navigation.navigate('ViewDetail')}>
             <MaterialCommunityIcons
               name="link-variant"
               size={50}
@@ -198,7 +295,7 @@ function Detail({navigation}) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.navigationIcon}
-            onPress={() => navigation.navigate('Credits')}>
+            onPress={() => props.navigation.navigate('Credits')}>
             <AntDesign
               name="user"
               size={35}
@@ -210,7 +307,7 @@ function Detail({navigation}) {
       </View>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {
@@ -235,6 +332,7 @@ const styles = StyleSheet.create({
     height: 2.5 * windowHeight,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    padding: 5,
   },
   weatherImg: {
     width: '100%',
@@ -243,16 +341,27 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
+  forecast: {
+    width: '100%',
+    textAlign: 'right',
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
+    fontSize: 14,
+    color: 'blue',
+    fontFamily: 'Ubuntu',
+    lineHeight: 16,
+    marginTop: '3%',
+  },
   title: {
     //position: 'absolute',
-    marginTop: '10%',
-    marginLeft: '5%',
+    marginTop: '7%',
+    //marginLeft: '5%',
     width: '100%',
-    fontSize: 28,
+    fontSize: 26,
     textAlign: 'left',
     alignItems: 'center',
     color: '#D57284',
-    fontWeight: '700',
+    fontWeight: '600',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
     lineHeight: 30,
@@ -267,7 +376,7 @@ const styles = StyleSheet.create({
   adviceTitle: {
     //position: 'absolute',
     //marginTop: '10%',
-    marginLeft: '5%',
+    //marginLeft: '5%',
     marginTop: '5%',
     width: '100%',
     fontSize: 20,
@@ -275,18 +384,18 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     //alignItems: 'center',
     color: '#000',
-    fontWeight: '700',
+    fontWeight: '600',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
     lineHeight: 24,
   },
   adviceView: {
-    width: '95%',
+    width: '100%',
     //position: 'absolute',
     //height: 330,
-    backgroundColor: '#f1f4f8',
+    backgroundColor: 'rgba(255, 255, 255,0.4)',
     borderRadius: 10,
-    marginTop: '5%',
+    marginTop: '3%',
   },
   adviceContent: {
     width: '100%',
@@ -299,13 +408,13 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     lineHeight: 24,
     display: 'flex',
-    textAlign: 'left',
+    textAlign: 'justify',
   },
   navigationBar: {
     position: 'absolute',
     //flex: 1,
-    width: '90%',
-    height: 62,
+    width: '95%',
+    height: '10%',
     marginTop: 0.85 * windowHeight,
     marginBottom: 10,
     flexDirection: 'row',
@@ -317,8 +426,8 @@ const styles = StyleSheet.create({
   },
   navigationIcon: {
     flex: 1,
-    width: 50,
-    height: 50,
+    width: '20%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

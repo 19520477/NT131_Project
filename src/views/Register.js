@@ -12,6 +12,7 @@ import {
   Button,
   Dimensions,
   Image,
+  ToastAndroid,
 } from 'react-native';
 import Navigation from '../../Navigation';
 import Inputs from '../components/Inputs';
@@ -36,25 +37,33 @@ function Register({navigation}) {
       });
 
       if (data.success) {
-        alert('Regist Successfully');
+        ToastAndroid.showWithGravity(
+          'Regist Successfully!',
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
         navigation.navigate('Login');
       }
     } catch (err) {
-      alert('Regist Failed');
+      ToastAndroid.showWithGravity(
+        'Regist Failed!',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
       console.error(err);
     }
   };
   return (
     <ImageBackground
       style={styles.background}
-      source={require('../images/background_img/login_background.png')}
+      source={{uri: 'https://wallpaperaccess.com/full/2443178.jpg'}}
       resizeMode="stretch">
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Register</Text>
+          <Text style={styles.title}>Đăng ký</Text>
           <View style={styles.square}>
             <Inputs
-              name="Username"
+              name="Tên người dùng"
               icon="user"
               value={username}
               text={text => setUsername(text)}
@@ -66,29 +75,28 @@ function Register({navigation}) {
               text={text => setFullname(text)}
             />
             <Inputs
-              name="Password"
+              name="Mật khẩu"
               icon="key"
               value={password}
               pass={true}
               text={text => setPassword(text)}
             />
           </View>
-          <View style={styles.questionView}>
+          {/* <View style={styles.questionView}>
             <Text style={styles.questionText}>Forgot Password?</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate('ForgotPassword')}>
               <Text style={styles.onClickText}> Click Here</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <TouchableOpacity style={styles.button} onPress={register}>
-            <Text style={styles.buttonName}>register</Text>
+            <Text style={styles.buttonName}>Đăng ký</Text>
           </TouchableOpacity>
 
           <View style={styles.questionView}>
-            <Text style={styles.questionText}>Don’t have an account?</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ForgotPassword')}>
-              <Text style={styles.onClickText}> Sign up</Text>
+            <Text style={styles.questionText}>Đã có tài khoản?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.onClickText}> Đăng nhập</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -107,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     position: 'relative',
-    padding: 10,
+    padding: 5,
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
@@ -115,10 +123,8 @@ const styles = StyleSheet.create({
   },
   title: {
     //position: 'absolute',
-    width: 0.5 * windowWidth,
-    height: 0.07 * windowHeight,
-    //left: '25%',
-    //right: '50%',
+    // width: 0.5 * windowWidth,
+    // height: 0.07 * windowHeight,
     marginTop: '30%',
     fontSize: 30,
     //justifyContent: 'center',
@@ -126,7 +132,7 @@ const styles = StyleSheet.create({
     //textAlignVertical: 'center',
     //alignItems: 'center',
     color: '#FBFBFB',
-    fontWeight: 'bold',
+    fontWeight: '700',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
     lineHeight: 34,
@@ -162,8 +168,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontSize: 12,
     lineHeight: 14,
-    textTransform: 'capitalize',
-    color: '#000000',
+    color: '#fff',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -174,8 +179,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontSize: 12,
     lineHeight: 14,
-    textTransform: 'capitalize',
-    color: '#283ACF',
+    color: '#4dbbdc',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -188,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#424B5A',
     marginTop: '10%',
     marginBottom: '7%',
-    width: 0.35 * windowWidth,
+    width: 0.4 * windowWidth,
     height: 0.08 * windowHeight,
     borderRadius: 10,
     justifyContent: 'center',
@@ -198,10 +202,6 @@ const styles = StyleSheet.create({
     //position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    //left: '30.99%',
-    //right: '32.28%',
-    //top: 13.5,
-
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
     fontWeight: '400',

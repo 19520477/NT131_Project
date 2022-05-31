@@ -12,6 +12,7 @@ import {
   Button,
   Dimensions,
   Image,
+  ToastAndroid,
 } from 'react-native';
 import Navigation from '../../Navigation';
 import Inputs from '../components/Inputs';
@@ -33,28 +34,40 @@ function Login({navigation}) {
         password,
       });
       if (data.success) {
+        ToastAndroid.showWithGravity(
+          'Login Successfully!',
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
         navigation.navigate('UnconnectedDevice');
       }
     } catch (e) {
-      alert('Login Failed');
+      console.error(e);
+      ToastAndroid.showWithGravity(
+        'Login Failed!',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
     }
   };
   return (
     <ImageBackground
       style={styles.background}
-      source={require('../images/background_img/login_background.png')}
+      source={{
+        uri: 'https://i.pinimg.com/736x/01/53/e9/0153e9c15f300a4929f2ae617be68b85.jpg',
+      }}
       resizeMode="stretch">
       <View style={styles.container}>
-        <Text style={styles.title}>LOGIN</Text>
+        <Text style={styles.title}>đăng nhập</Text>
         <View style={styles.square}>
           <Inputs
-            name="Username"
+            name="Tên người dùng"
             icon="user"
             value={username}
             text={text => setUsername(text)}
           />
           <Inputs
-            name="Password"
+            name="Mật khẩu"
             icon="key"
             value={password}
             pass={true}
@@ -62,20 +75,20 @@ function Login({navigation}) {
           />
         </View>
         <View style={styles.questionView}>
-          <Text style={styles.questionText}>Forgot Password?</Text>
+          <Text style={styles.questionText}>Quên mật khẩu? Nhấn vào</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text style={styles.onClickText}> Click Here</Text>
+            <Text style={styles.onClickText}> đây</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.button} onPress={login}>
-          <Text style={styles.buttonName}>LOGIN</Text>
+          <Text style={styles.buttonName}>đăng nhập</Text>
         </TouchableOpacity>
 
         <View style={styles.questionView}>
-          <Text style={styles.questionText}>Don’t have an account?</Text>
+          <Text style={styles.questionText}>Chưa có tài khoản?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.onClickText}> Sign up</Text>
+            <Text style={styles.onClickText}> Đăng ký</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -101,18 +114,14 @@ const styles = StyleSheet.create({
   },
   title: {
     //position: 'absolute',
-    width: 0.5 * windowWidth,
-    height: 0.07 * windowHeight,
-    //left: '25%',
-    //right: '50%',
+    // width: 0.5 * windowWidth,
+    // height: 0.07 * windowHeight,
     marginTop: '30%',
     fontSize: 30,
     //justifyContent: 'center',
     textAlign: 'center',
-    //textAlignVertical: 'center',
-    //alignItems: 'center',
     color: '#FBFBFB',
-    fontWeight: 'bold',
+    fontWeight: '700',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
     lineHeight: 34,
@@ -135,7 +144,7 @@ const styles = StyleSheet.create({
     //position: 'absolute',
     width: '100%',
     height: 25,
-    marginTop: 10,
+    marginTop: '10%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -148,8 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontSize: 12,
     lineHeight: 14,
-    textTransform: 'capitalize',
-    color: '#000000',
+    color: '#fff',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -157,24 +165,20 @@ const styles = StyleSheet.create({
   onClickText: {
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
-    fontWeight: '300',
+    fontWeight: 'normal',
     fontSize: 12,
     lineHeight: 14,
-    textTransform: 'capitalize',
-    color: '#283ACF',
+    color: '#000',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
   },
 
   button: {
-    //position: 'absolute',
-    //top: '70%',
-    //bottom: '25%',
     backgroundColor: '#424B5A',
     marginTop: '10%',
-    marginBottom: '7%',
-    width: 0.35 * windowWidth,
+    //marginBottom: '7%',
+    width: 0.4 * windowWidth,
     height: '8%',
     borderRadius: 10,
     justifyContent: 'center',
