@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751265275891",
+    "project_id": "weather-app-605d3",
+    "storage_bucket": "weather-app-605d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751265275891:android:cf12c07433cd19fd5afc86",
+        "android_client_info": {
+          "package_name": "com.thermometer_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751265275891-fsjl70d2g3qneef0c3h8bopadm33d961.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvydYy7pIhNAjgzIY6Kugy0tkcqcNbQag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751265275891-fsjl70d2g3qneef0c3h8bopadm33d961.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

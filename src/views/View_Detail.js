@@ -242,11 +242,19 @@ const Detail = props => {
                 {' - '}
                 {getFeelingByTemp(sensorData?.temp).t_alert} {'\n'}
                 {' - '}
-                {/* {getAdviceByUV(sensorData?.uv).uv_alert} {'\n'} */}
+                {getAdviceByUV(sensorData?.uv).uv_alert} {'\n'}
                 {' - '}
                 {getAdviceByHumidity(sensorData?.humid).h_alert}
               </Text>
             </View>
+            {/* Note for sunscreen by UV */}
+            {/* <View style={styles.adviceView}>
+              <Text style={styles.adviceContent}>
+                `{UV < 5: spf từ 30 đến 40} {'\n'}
+                5 < UV < 8: spf từ 50 đến 60 {'\n'}
+                8 < UV < 10: spf 100}
+              </Text>
+            </View> */}
           </View>
         </ScrollView>
 

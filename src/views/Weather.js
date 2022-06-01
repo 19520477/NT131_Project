@@ -38,6 +38,8 @@ const Weather = props => {
     feel: 0,
     status: null,
     wind: 0,
+    uv: 0,
+    light: 0,
   });
   const [future, setFutureNext4Hour] = useState({
     time: null,
@@ -65,6 +67,8 @@ const Weather = props => {
           feel: data.current.feelslike_c,
           status: data.forecast.forecastday[0].day.condition.text,
           wind: data.forecast.forecastday[0].day.maxwind_kph,
+          uv: data.forecast.forecastday[0].day.uv,
+          light: data.forecast.forecastday[0].day.avgvis_km,
         });
         var index = new Date().getHours() + 4;
         setFutureNext4Hour({

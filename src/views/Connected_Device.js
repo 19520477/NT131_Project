@@ -93,20 +93,20 @@ function ConnectedDevice({navigation}) {
     }
   };
 
-  // const createChannel = () => {
-  //   PushNotification.createChannel({
-  //     channelId: '1',
-  //     channelName: 'Get sensor data',
-  //   });
-  // };
+  const createChannel = () => {
+    PushNotification.createChannel({
+      channelId: '1',
+      channelName: 'Get sensor data',
+    });
+  };
 
-  // const handleNotification = ({temp, humid, uv, light}) => {
-  //   PushNotification.localNotification({
-  //     channelId: '1',
-  //     title: 'Get sensor data successfully!',
-  //     msg: `T=${temp}°C, H=${humid}%, UV=${uv}, L=${light}`,
-  //   });
-  // };
+  const handleNotification = ({temp, humid, uv, light}) => {
+    PushNotification.localNotification({
+      channelId: '1',
+      title: 'Get sensor data successfully!',
+      msg: `T=${temp}°C, H=${humid}%, UV=${uv}, L=${light}`,
+    });
+  };
 
   const getFeelingByTemp = temp => {
     if (temp < 25)
@@ -407,15 +407,15 @@ function ConnectedDevice({navigation}) {
             {/* button navigates view_detail screen */}
             <TouchableOpacity
               style={styles.button}
-              onPress={
-                () => getSensorInformation()
-                // handleNotification(
-                //   sensorData?.temp,
-                //   sensorData?.humid,
-                //   sensorData?.uv,
-                //   sensorData?.light,
-                // );
-              }>
+              onPress={() => {
+                getSensorInformation(),
+                  handleNotification(
+                    sensorData?.temp,
+                    sensorData?.humid,
+                    sensorData?.uv,
+                    sensorData?.light,
+                  );
+              }}>
               <Text style={styles.buttonName}>refresh dữ liệu</Text>
             </TouchableOpacity>
 
@@ -641,7 +641,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     alignItems: 'center',
     color: '#000',
-    fontWeight: '600',
+    fontWeight: '700',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
     lineHeight: 24,
