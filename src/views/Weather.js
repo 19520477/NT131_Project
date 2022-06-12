@@ -123,7 +123,7 @@ const Weather = props => {
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.childContainer}>
-            <Text style={styles.location}>Ha noi</Text>
+            <Text style={styles.location}>Ho Chi Minh</Text>
             <Text style={styles.time}>
               {getDayInWeek()}, {date}/{month}/{year}
               {'\t'}

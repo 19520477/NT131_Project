@@ -43,7 +43,7 @@ const FactorItem = ({temp, fah, humid, light, uv, wind}) => {
         <View style={styles.contentView}>
           <Text style={styles.listItemText}>Chỉ số tia UV</Text>
           <Text style={styles.detail}>
-            {uv}% {'\t'} | {'\t'} Cường độ ánh sáng: {light} lux
+            {uv} {'\t'} | {'\t'} Cường độ ánh sáng: {light} lux
           </Text>
         </View>
       </View>

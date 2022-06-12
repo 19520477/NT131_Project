@@ -19,6 +19,7 @@ import Inputs from '../components/Inputs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import axios from '../api';
+import PushNotification from 'react-native-push-notification';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,6 +27,17 @@ const windowHeight = Dimensions.get('window').height;
 function Login({navigation}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const createChannel = () => {
+    PushNotification.createChannel({
+      channelId: '1',
+      channelName: 'Get sensor data',
+    });
+  };
+
+  useEffect(() => {
+    createChannel();
+  });
 
   const login = async () => {
     try {

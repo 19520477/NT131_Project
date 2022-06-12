@@ -93,18 +93,19 @@ function ConnectedDevice({navigation}) {
     }
   };
 
-  const createChannel = () => {
-    PushNotification.createChannel({
-      channelId: '1',
-      channelName: 'Get sensor data',
-    });
-  };
+  // const createChannel = () => {
+  //   PushNotification.createChannel({
+  //     channelId: '1',
+  //     channelName: 'Get sensor data',
+  //   });
+  // };
 
   const handleNotification = ({temp, humid, uv, light}) => {
+    PushNotification.cancelAllLocalNotifications();
     PushNotification.localNotification({
       channelId: '1',
-      title: 'Get sensor data successfully!',
-      msg: `T=${temp}°C, H=${humid}%, UV=${uv}, L=${light}`,
+      ticker: 'Get sensor data successfully!',
+      bigText: `T=${temp}°C, H=${humid}%, UV=${uv}, L=${light}`,
     });
   };
 
@@ -186,10 +187,11 @@ function ConnectedDevice({navigation}) {
     findGreet();
     //getUserInformation();
     getSensorInformation();
-    const timeOutId = setTimeout(() => getSensorInformation(), 60000);
+    const timeOutId = setTimeout(() => {
+      getSensorInformation();
+    }, 60000);
 
     return () => clearTimeout(timeOutId);
-    createChannel();
   }, []);
 
   // Set the greeting by hours

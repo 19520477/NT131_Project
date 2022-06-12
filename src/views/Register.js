@@ -69,7 +69,7 @@ function Register({navigation}) {
               text={text => setUsername(text)}
             />
             <Inputs
-              name="Fullname"
+              name="Họ và tên"
               icon="user"
               value={fullname}
               text={text => setFullname(text)}

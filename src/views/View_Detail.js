@@ -346,8 +346,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 0.27 * windowHeight,
     backgroundColor: '#fff',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   forecast: {
     width: '100%',
